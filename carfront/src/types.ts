@@ -9,11 +9,25 @@ export type CarResponse = {
     self: {
       href: string;
     }, 
-    car: {
+    car : {
       href: string;
     }, 
     owner: {
       href: string;
     }
   }
+}
+
+export type Car = {
+  brand: string;
+  model: string;
+  color: string;
+  registrationNumber: string;
+  modelYear: number;
+  price: number;
+}
+
+export type CarEntity = {
+  car: Car;
+  url: string;
 }
