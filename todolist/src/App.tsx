@@ -6,18 +6,18 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Todo } from "./types";
-import {List, ListItem, ListItemText} from '@mui/material';
-import { useState } from 'react';
-import AddList from "./components/AddList";
-
+// import { Todo } from "./types";
+// import {List, ListItem, ListItemText} from '@mui/material';
+// import { useState } from 'react';
+// import AddList from "./components/AddList";
+import Login from "./components/Login";
 const queryClient = new QueryClient();
 
 function App() {
-  const [todos,setTodos] =useState<Todo[]>([]);
-  const addTodo = (todo:Todo) => {
-    setTodos([todo,...todos]);
-  }
+  // const [todos,setTodos] =useState<Todo[]>([]);
+  // const addTodo = (todo:Todo) => {
+  //   setTodos([todo,...todos]);
+  // }
   return (
     <Container>
       <CssBaseline />
@@ -28,19 +28,10 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <AddList addTodo={addTodo}/>
-      <List>
-        {
-          todos.map((todo, index)=>
-            <ListItem key={index} divider>
-              <ListItemText
-              primary={todo.content}
-              />
-            </ListItem>
-          )
-        }
-      </List>
-      <QueryClientProvider client={queryClient}></QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <Login>
+        </Login>
+      </QueryClientProvider>
     </Container>
   );
 }

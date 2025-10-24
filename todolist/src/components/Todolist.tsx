@@ -6,10 +6,12 @@ import {
   GridColDef,
   GridToolbar,
 } from "@mui/x-data-grid";
-import { Snackbar, IconButton, Tooltip } from "@mui/material";
+import {Snackbar, IconButton, Tooltip } from "@mui/material";
 import AddList from "./AddList";
+import { useState } from "react";
 
 function Todolist() {
+  const [ open, setOpen ] = useState(false);
   const queryClient = useQueryClient();
   const { data, error, isSuccess } = useQuery({
     queryKey: ["todos"],
@@ -31,6 +33,9 @@ function Todolist() {
       field: "delete",
       headerName: "",
       width: 90,
+      sortable: false,
+      filterable: false,
+      disableColumnMenu: true,
       renderCell: (params: GridCellParams) => (
         <Tooltip title="Delete">
           <IconButton
@@ -38,13 +43,13 @@ function Todolist() {
             size="small"
             onClick={() => {
               if (confirm(`${params.row.content}를 삭제하시겠습니까?`)) {
-                mutate(params.row._link.self.href);
+                mutate(params.row.id);
               }
             }}
-          ></IconButton>
+          >Delete</IconButton>
         </Tooltip>
-      ),
-    },
+      )
+    }
   ];
 
   if (!isSuccess) {
@@ -60,8 +65,14 @@ function Todolist() {
         <DataGrid
           rows={data}
           columns={columns}
-          getRowId={(row) => row._links.self.href}
+          getRowId={(row) => row.id}
           slots={{ toolbar: GridToolbar }}
+        />
+        <Snackbar 
+          open={open}
+          autoHideDuration={2000}
+          onClose={() => setOpen(false)}
+          message='선택한 Content 정보가 삭제되었습니다 🚓'
         />
       </>
     );

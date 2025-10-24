@@ -18,7 +18,7 @@ export const getCars = async (): Promise<CarResponse[]> => {
     `${import.meta.env.VITE_API_URL}/api/cars`,
     getAxiosConfig()
   );
-
+  console.log(response.data._embedded.cars)
   return response.data._embedded.cars;
 };
 

@@ -3,9 +3,6 @@ export type Todo = {
 }
 export type TodoResponse = {
   content: string;
-  _link: {
-    self: {
-      href: string;
-    }
-  }
+  id:number;
+  completed:boolean;
 }
