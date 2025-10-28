@@ -6,11 +6,11 @@ type AddItemProps = {
   addItem: (item: Item) => void;
 }
 
-function AddItem(props: AddItemProps){
-  const [open, setOpen] = useState(false);
-  const [item, setItem] = useState<Item>({
-    product:'',
-    amount:'',
+function AddItem(props: AddItemProps) {
+  const [ open, setOpen ] = useState(false);
+  const [ item, setItem ] = useState<Item>({
+    product: '',
+    amount: '',
   });
 
   const handleOpen = () => {
@@ -18,14 +18,14 @@ function AddItem(props: AddItemProps){
   }
 
   const handleClose = () => {
-    setOpen(false)
+    setOpen(false);
   }
 
   // App.tsx의 addItem 함수를 호출하고, item 상태를 전달
   const addItem = () => {
     props.addItem(item);
     // TextField에 있는 내용을 다 지우고 Modal을 닫음
-    setItem({product: '', amount:''});
+    setItem({product: '', amount: ''});
     handleClose();
   }
 
@@ -38,11 +38,11 @@ function AddItem(props: AddItemProps){
         <DialogTitle>New Item</DialogTitle>
         <DialogContent>
           <TextField value={item.product} margin="dense"
-          onChange={e => setItem({...item, product: e.target.value})}
-          label="product/제품명" fullWidth/>
+            onChange={e => setItem({...item, product: e.target.value})}
+            label="Product/제품명" fullWidth />
           <TextField value={item.amount} margin="dense"
-          onChange={e => setItem({...item, amount: e.target.value})}
-          label="Amount/수량" fullWidth
+            onChange={e => setItem({...item, amount: e.target.value})}
+            label="Amount/수량" fullWidth
           />
         </DialogContent>
         <Button onClick={handleClose}>
